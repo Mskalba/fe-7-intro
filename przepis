@@ -1,0 +1,24 @@
+1. renderowanie HTML 
+
+2. Zaladowanie JS 
+-> stworzenie funkcji main 
+->stworzenie funkcji addButtonHandler
+-> nalozenie listenera na caly dokument, 
+ktory bedzie oczekiwal na zdarzenie 'domcontentloaded' i jak ono się dopelni to wywolaj funkcje main
+
+3. renderowanie HTML
+
+4. Przegladarka skonczyla wyswietlac HTML 
+-> rzuć zdarzenie 'domcontentloaded'
+
+5. Silnik JS / listener zaobserwowal 'domcontentloaded' 
+-> zbieranie informacji -> main({z zebranymi informacjami})
+
+6. Wywolanie funkcji main:
+...
+Stworzenie listenera na klikniecie uzytkownika na przycisku o id 'add'
+
+
+.......
+
+7. Uzytkownik po 2h klika na przycisk add -> 
