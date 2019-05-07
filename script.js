@@ -1,26 +1,22 @@
-var initialData = [
-    {
-        id: 1,
-        title: 'Zrobić 1 event listener na cala listę',
-        color: 'green'
-    }, {
-        id: 2,
-        title: 'Pokazać chaining na array functions',
-        color: 'blue'
-    },
-];
-var nextId = 3;
 var $list, $addTaskInput, $addTaskColor;
+const BASE_URL = 'http://195.181.210.249:3000/todo/';
 
 function main() {
     prepareDOMElements();
     prepareDOMEvents();
-    prepareInitialList(initialData);
+    getTodos();
+}
+
+function getTodos() {
+    axios.get(BASE_URL)
+        .then(res => {
+            prepareInitialList(res.data);
+        });
 }
 
 function prepareInitialList(elements) {
     elements.forEach(element => {
-        addElementToList($list, element.title, element.color, element.id);
+        addElementToList($list, element.title, element.extra, element.id);
     });
 }
 
@@ -37,8 +33,13 @@ function prepareDOMEvents() {
 }
 
 function addButtonHandler() {
-    addElementToList($list, $addTaskInput.value, $addTaskColor.value, nextId);
-    nextId ++;
+    axios.post(BASE_URL, {
+        title: $addTaskInput.value,
+        extra: $addTaskColor.value,
+    }).then(() => {
+        $list.innerHTML = '';
+        getTodos();
+    })
 }
 
 function listClickHandler(event) {
@@ -50,6 +51,7 @@ function listClickHandler(event) {
 }
 
 function deleteElement(elementId) {
+    axios.delete(BASE_URL + elementId);
     document.getElementById(elementId).remove();
 }
 
